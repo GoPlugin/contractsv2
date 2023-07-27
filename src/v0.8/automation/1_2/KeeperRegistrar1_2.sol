@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.6;
 
-import "../../interfaces/LinkTokenInterface.sol";
+import "../../interfaces/PliTokenInterface.sol";
 import "../../interfaces/automation/1_2/KeeperRegistryInterface1_2.sol";
 import "../../interfaces/TypeAndVersionInterface.sol";
 import "../../ConfirmedOwner.sol";
@@ -106,13 +106,13 @@ contract KeeperRegistrar is TypeAndVersionInterface, ConfirmedOwner, ERC677Recei
    * @param minLINKJuels minimum LINK that new registrations should fund their upkeep with
    */
   constructor(
-    address LINKAddress,
+    address PLIAddress,
     AutoApproveType autoApproveConfigType,
     uint16 autoApproveMaxAllowed,
     address keeperRegistry,
     uint96 minLINKJuels
   ) ConfirmedOwner(msg.sender) {
-    LINK = LinkTokenInterface(LINKAddress);
+    LINK = PliTokenInterface(LINKAddress);
     setRegistrationConfig(autoApproveConfigType, autoApproveMaxAllowed, keeperRegistry, minLINKJuels);
   }
 

@@ -6,8 +6,8 @@ import "./ConfirmedOwner.sol";
 import "./VRFV2WrapperConsumerBase.sol";
 
 /**
- * Request testnet LINK and ETH here: https://faucets.chain.link/
- * Find information on LINK Token Contracts and get the latest ETH and LINK faucets here: https://docs.chain.link/docs/link-token-contracts/
+ * Request testnet PLI and ETH here: https://faucets.chain.link/
+ * Find information on PLI Token Contracts and get the latest ETH and PLI faucets here: https://docs.chain.link/docs/link-token-contracts/
  */
 
 /**
@@ -53,15 +53,15 @@ contract VRFv2DirectFundingConsumer is
     // Cannot exceed VRFV2Wrapper.getConfig().maxNumWords.
     uint32 numWords = 2;
 
-    // Address LINK - hardcoded for Sepolia
-    address linkAddress =0x33f4212b027E22aF7e6BA21Fc572843C0D701CD1;
+    // Address PLI - hardcoded for Sepolia
+    address pliAddress =0x33f4212b027E22aF7e6BA21Fc572843C0D701CD1;
 
     // address WRAPPER - hardcoded for Sepolia
     address wrapperAddress = 0xCA24FbBb16Cdf23763439d1Ff5b41110962184F8;
 
     constructor()
         ConfirmedOwner(msg.sender)
-        VRFV2WrapperConsumerBase(linkAddress, wrapperAddress)
+        VRFV2WrapperConsumerBase(pliAddress, wrapperAddress)
     {}
 
     function requestRandomWords()
@@ -112,12 +112,12 @@ contract VRFv2DirectFundingConsumer is
     }
 
     /**
-     * Allow withdraw of Link tokens from the contract
+     * Allow withdraw of Pli tokens from the contract
      */
-    function withdrawLink() public onlyOwner {
-        PliTokenInterface link = PliTokenInterface(linkAddress);
+    function withdrawPli() public onlyOwner {
+        PliTokenInterface pli = PliTokenInterface(pliAddress);
         require(
-            link.transfer(msg.sender, link.balanceOf(address(this))),
+            pli.transfer(msg.sender, pli.balanceOf(address(this))),
             "Unable to transfer"
         );
     }

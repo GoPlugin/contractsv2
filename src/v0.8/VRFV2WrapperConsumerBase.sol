@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import "@goplugin/contracts/src/v0.8/interfaces/PliTokenInterface.sol";
+import "@goplugin/contractsv2/src/v0.8/interfaces/PliTokenInterface.sol";
 import "./interfaces/VRFV2WrapperInterface.sol";
 
 /** *******************************************************************************

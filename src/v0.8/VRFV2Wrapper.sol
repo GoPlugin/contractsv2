@@ -4,7 +4,7 @@ pragma solidity ^0.8.6;
 import "./ConfirmedOwner.sol";
 import "./interfaces/TypeAndVersionInterface.sol";
 import "./VRFConsumerBaseV2.sol";
-import "@goplugin/contracts/src/v0.8/interfaces/PliTokenInterface.sol";
+import "@goplugin/contractsv2/src/v0.8/interfaces/PliTokenInterface.sol";
 import "./interfaces/AggregatorV3Interface.sol";
 import "./interfaces/VRFCoordinatorV2Interface.sol";
 import "./interfaces/VRFV2WrapperInterface.sol";
