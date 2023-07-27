@@ -9,7 +9,7 @@ pragma solidity ^0.7.0;
  * current contents of the buffer. The bytes object should not be stored between
  * operations, as it may change due to resizing of the buffer.
  */
-library BufferChainlink {
+library BufferPlugin {
   /**
    * @dev Represents a mutable buffer. Buffers have a current value (buf) and
    *      a capacity. The capacity may be longer than the current value, in

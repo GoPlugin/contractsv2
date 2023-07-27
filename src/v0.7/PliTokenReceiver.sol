@@ -1,20 +1,20 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.7.0;
 
-abstract contract LinkTokenReceiver {
+abstract contract PliTokenReceiver {
   /**
-   * @notice Called when LINK is sent to the contract via `transferAndCall`
+   * @notice Called when PLI is sent to the contract via `transferAndCall`
    * @dev The data payload's first 2 words will be overwritten by the `sender` and `amount`
    * values to ensure correctness. Calls oracleRequest.
    * @param sender Address of the sender
-   * @param amount Amount of LINK sent (specified in wei)
+   * @param amount Amount of PLI sent (specified in wei)
    * @param data Payload of the transaction
    */
   function onTokenTransfer(
     address sender,
     uint256 amount,
     bytes memory data
-  ) public validateFromLINK permittedFunctionsForLINK(data) {
+  ) public validateFromPLI permittedFunctionsForPLI(data) {
     assembly {
       // solhint-disable-next-line avoid-low-level-calls
       mstore(add(data, 36), sender) // ensure correct sender is passed
@@ -26,7 +26,7 @@ abstract contract LinkTokenReceiver {
     require(success, "Unable to create request");
   }
 
-  function getChainlinkToken() public view virtual returns (address);
+  function getPluginToken() public view virtual returns (address);
 
   /**
    * @notice Validate the function called on token transfer
@@ -34,10 +34,10 @@ abstract contract LinkTokenReceiver {
   function _validateTokenTransferAction(bytes4 funcSelector, bytes memory data) internal virtual;
 
   /**
-   * @dev Reverts if not sent from the LINK token
+   * @dev Reverts if not sent from the PLI token
    */
-  modifier validateFromLINK() {
-    require(msg.sender == getChainlinkToken(), "Must use LINK token");
+  modifier validateFromPLI() {
+    require(msg.sender == getPluginToken(), "Must use PLI token");
     _;
   }
 
@@ -45,7 +45,7 @@ abstract contract LinkTokenReceiver {
    * @dev Reverts if the given data does not begin with the `oracleRequest` function selector
    * @param data The data payload of the request
    */
-  modifier permittedFunctionsForLINK(bytes memory data) {
+  modifier permittedFunctionsForPLI(bytes memory data) {
     bytes4 funcSelector;
     assembly {
       // solhint-disable-next-line avoid-low-level-calls

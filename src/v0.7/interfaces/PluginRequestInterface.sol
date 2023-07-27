@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.7.0;
 
-interface ChainlinkRequestInterface {
+interface PluginRequestInterface {
   function oracleRequest(
     address sender,
     uint256 requestPrice,

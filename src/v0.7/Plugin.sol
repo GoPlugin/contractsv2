@@ -1,28 +1,28 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.7.0;
 
-import {CBORChainlink} from "./vendor/CBORChainlink.sol";
-import {BufferChainlink} from "./vendor/BufferChainlink.sol";
+import {CBORPlugin} from "./vendor/CBORPlugin.sol";
+import {BufferPlugin} from "./vendor/BufferPlugin.sol";
 
 /**
- * @title Library for common Chainlink functions
+ * @title Library for common Plugin functions
  * @dev Uses imported CBOR library for encoding to buffer
  */
-library Chainlink {
+library Plugin {
   uint256 internal constant defaultBufferSize = 256; // solhint-disable-line const-name-snakecase
 
-  using CBORChainlink for BufferChainlink.buffer;
+  using CBORPlugin for BufferPlugin.buffer;
 
   struct Request {
     bytes32 id;
     address callbackAddress;
     bytes4 callbackFunctionId;
     uint256 nonce;
-    BufferChainlink.buffer buf;
+    BufferPlugin.buffer buf;
   }
 
   /**
-   * @notice Initializes a Chainlink request
+   * @notice Initializes a Plugin request
    * @dev Sets the ID, callback address, and callback function signature on the request
    * @param self The uninitialized request
    * @param jobId The Job Specification ID
@@ -35,8 +35,8 @@ library Chainlink {
     bytes32 jobId,
     address callbackAddr,
     bytes4 callbackFunc
-  ) internal pure returns (Chainlink.Request memory) {
-    BufferChainlink.init(self.buf, defaultBufferSize);
+  ) internal pure returns (Plugin.Request memory) {
+    BufferPlugin.init(self.buf, defaultBufferSize);
     self.id = jobId;
     self.callbackAddress = callbackAddr;
     self.callbackFunctionId = callbackFunc;
@@ -50,8 +50,8 @@ library Chainlink {
    * @param data The CBOR data
    */
   function setBuffer(Request memory self, bytes memory data) internal pure {
-    BufferChainlink.init(self.buf, data.length);
-    BufferChainlink.append(self.buf, data);
+    BufferPlugin.init(self.buf, data.length);
+    BufferPlugin.append(self.buf, data);
   }
 
   /**
