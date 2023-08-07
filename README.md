@@ -1,4 +1,4 @@
-# Chainlink Smart Contracts
+# Goplugin Smart Contracts
 
 ## Installation
 
